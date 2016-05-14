@@ -1,5 +1,5 @@
 ## MendellianGenetics
-Project for simulating Mendel's genetics. Written in Haskell.
+Haskell library for simulating Mendel's genetics. Written in Haskell.
 ### Usage
 To get all possible children from 2 parents:
 ```
