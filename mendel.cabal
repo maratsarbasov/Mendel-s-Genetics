@@ -1,0 +1,12 @@
+Name:                Mendel
+Version:             0.1
+Description:         Mendellian inheritance library
+License:             BSD3
+Author:              Marat Sarbasov
+Build-Type:          Simple
+Cabal-Version:       >=1.2
+
+Library
+ Build-Depends:     base >= 3 && < 5
+ Exposed-modules:   Mendel
+ ghc-options:       -Wall
