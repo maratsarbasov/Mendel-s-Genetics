@@ -9,6 +9,9 @@ import Data.Char
 import Data.List (sort)
 import Data.String
 
+import Graphics.Gloss
+
+
 -- | Allele data.
 data Allele
     = Dominant      -- ^ Dominant
@@ -99,7 +102,7 @@ getChildren1 (Genotype mother) (Genotype father) =
            
 
 f :: Feature -> Feature -> Prob Feature
-f (Feature c a1 b1) (Feature _ a2 b2) = Prob [(Feature c a b, 0.25) | a <- [a1, a2], b <- [b1, b2] ]
+f (Feature c a1 b1) (Feature _ a2 b2) = Prob [(Feature c a b, 0.25) | a <- [a1, b1], b <- [a2, b2] ]
 
 sumDuplicates :: (Eq a) => Prob a -> Prob a
 sumDuplicates (Prob gl) = Prob $ foldl (\seen x -> if isJust (lookup (fst x) seen)
@@ -115,6 +118,20 @@ concatProb xs = foldr (mergeProb (:)) (Prob [([],1)]) xs
 mergeProb :: (a -> b -> c) -> Prob a -> Prob b -> Prob c
 mergeProb f (Prob xs) (Prob ys)  = Prob [(f x y, px * py) | (x, px) <- xs, (y, py) <- ys]
 
+
+----------------
+----VISUALIZATION---
+visualize :: IO ()
+visualize = display window white drawing
+
+window :: Display
+window = InWindow "Nice Window" (200, 200) (10, 10)
+
+background :: Color
+background = white
+
+drawing :: Picture
+drawing = circle 80
 
 
 getAlleleNumber :: Int -> Feature -> Allele
